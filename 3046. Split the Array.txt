@@ -1,0 +1,34 @@
+Solution 1:    
+
+public boolean isPossibleToSplit(int[] nums) {
+        HashMap<Integer, Integer> count = new HashMap<>();
+
+        for(int n:nums){
+            count.put(n, count.getOrDefault(n,0)+1);
+        }
+
+        for(int c:count.values()){
+            if(c>2){
+                return false;
+            }
+        }
+
+        return true;
+}
+
+
+
+
+Solution 2 :
+    
+public boolean isPossibleToSplit(int[] nums) {
+        int[] result = new int[101];
+        for(int n:nums){
+            result[n]++;
+            if(result[n]>2){
+                return false;
+            }
+        }
+
+        return true;
+    }

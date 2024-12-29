@@ -1,0 +1,25 @@
+The "fast" pointer moves ahead at a faster pace than the "slow" pointer. In this context, "fast" moves n+1 steps ahead initially, where n is the distance between the head and the nth node from the end.
+Meanwhile, the "slow" pointer moves one step at a time.
+
+
+struct ListNode* removeNthFromEnd(struct ListNode* head, int n) {
+ struct ListNode* temp = (struct ListNode*)malloc(sizeof(struct ListNode));
+    temp->next = head;
+    struct ListNode* fast = temp;
+    struct ListNode* slow = temp;
+    for (int i = 0; i < n + 1; i++) {
+        fast = fast->next;
+    }
+    
+    while (fast != NULL) {
+        fast = fast->next;
+        slow = slow->next;
+    }
+    
+    struct ListNode* temp1 = slow->next;
+    slow->next = slow->next->next;
+    free(temp1);
+    struct ListNode* result = temp->next;
+    free(temp);
+    return result;
+}

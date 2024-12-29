@@ -1,0 +1,26 @@
+class Solution {
+    public String toHex(int num) {
+        if (num == 0) {
+            return "0";
+        }
+        
+        char[] hexChars = "0123456789abcdef".toCharArray();
+        StringBuilder result = new StringBuilder();
+        
+        long unsignedNum = num & 0xFFFFFFFFL; 
+       
+        while (unsignedNum > 0) {
+            int remainder = (int) (unsignedNum % 16);
+            result.insert(0, hexChars[remainder]);
+            unsignedNum /= 16;
+        }
+        
+        return result.toString();
+    }
+}
+
+class Solution {
+    public String toHex(int num) {
+       return Integer.toHexString(num);
+    }
+}

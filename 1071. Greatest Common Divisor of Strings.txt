@@ -1,0 +1,32 @@
+class Solution {
+    public String gcdOfStrings(String str1, String str2) {
+        if (!(str1 + str2).equals(str2 + str1)) {
+            return "";
+        }
+        
+        int len1 = str1.length();
+        int len2 = str2.length();
+        for (int i = Math.min(len1, len2); i > 0; i--) {
+            if (len1 % i == 0 && len2 % i == 0) {
+                String substring = str1.substring(0, i);
+                if (isDivisible(str1, substring) && isDivisible(str2, substring)) {
+                    return substring;
+                }
+            }
+        }
+
+        return "";
+
+    }
+    
+    private static boolean isDivisible(String str, String substring) {
+        int len = str.length();
+        int subLen = substring.length();
+        StringBuilder sb = new StringBuilder();
+        while (sb.length() < len) {
+            sb.append(substring);
+        }
+
+        return sb.toString().equals(str);
+    }
+}

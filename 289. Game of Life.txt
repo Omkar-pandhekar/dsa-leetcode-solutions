@@ -1,0 +1,51 @@
+class Solution {
+    public void gameOfLife(int[][] board) {
+        int m = board.length;
+        int n = board[0].length;
+
+        for(int i = 0; i < m;i++){
+            for(int j = 0; j < n;j++ ){
+                int liveNeighbours = countNeighbour(board, i, j, m, n);
+                if(board[i][j] == 1 && (liveNeighbours < 2 || liveNeighbours > 3)){
+                    board[i][j] = -1;
+                }
+                if(board[i][j] == 0 && liveNeighbours == 3){
+                    board[i][j] = 2;
+                }
+
+            }
+        }
+
+        for(int i = 0;i < m;i++){
+            for(int j = 0;j < n;j++){
+                if(board[i][j] == -1){
+                    board[i][j] = 0;
+                }
+                if(board[i][j] == 2){
+                    board[i][j] = 1;
+                }
+            }
+        }
+    }
+
+
+    private int countNeighbour(int[][] board, int i, int j, int m, int n){
+        int liveNeighbour = 0;
+
+        for(int x = -1; x <= 1;x++){
+            for(int y = -1; y <= 1;y++){
+                if(x == 0 && y == 0){
+                    continue;
+                }
+                int ni = i + x;
+                int nj = j + y;
+
+                if(ni >= 0 && nj >= 0 && ni < m && nj < n && Math.abs(board[ni][nj])==1){
+                    liveNeighbour++;
+                }
+            }
+        }
+
+        return liveNeighbour;
+    }
+}

@@ -1,0 +1,35 @@
+class Solution {
+    public int thirdMax(int[] nums) {
+        Set<Integer> maxSet = new HashSet<>();
+        
+        for (int num : nums) {
+            maxSet.add(num);
+            if (maxSet.size() > 3) {
+                maxSet.remove(min(maxSet));
+            }
+        }
+        
+       
+        if (maxSet.size() < 3) {
+            return max(maxSet);
+        }
+        
+        return min(maxSet);
+    }
+    
+    private static int max(Set<Integer> set) {
+        int max = Integer.MIN_VALUE;
+        for (int num : set) {
+            max = Math.max(max, num);
+        }
+        return max;
+    }
+
+    private static int min(Set<Integer> set) {
+        int min = Integer.MAX_VALUE;
+        for (int num : set) {
+            min = Math.min(min, num);
+        }
+        return min;
+    }
+}

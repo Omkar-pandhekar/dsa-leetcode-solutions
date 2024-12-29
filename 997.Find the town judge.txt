@@ -1,0 +1,37 @@
+ public int findJudge(int n, int[][] trust) {
+        int[] inDegree = new int[n + 1]; 
+        int[] outDegree = new int[n + 1];
+
+        for (int[] relation : trust) {
+            int trustingPerson = relation[0];
+            int trustedPerson = relation[1];
+
+            outDegree[trustingPerson]++;
+            inDegree[trustedPerson]++;
+        }
+
+        
+        for (int i = 1; i <= n; i++) {
+            if (inDegree[i] == n - 1 && outDegree[i] == 0) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+
+
+In a town, there are n people labeled from 1 to n. There is a rumor that one of these people is secretly the town judge.
+
+If the town judge exists, then:
+
+The town judge trusts nobody.
+Everybody (except for the town judge) trusts the town judge.
+There is exactly one person that satisfies properties 1 and 2.
+You are given an array trust where trust[i] = [ai, bi] representing that the person labeled ai trusts the person labeled bi. If a trust relationship does not exist in trust array, then such a trust relationship does not exist.
+
+Return the label of the town judge if the town judge exists and can be identified, or return -1 otherwise.
+
+
+So we can visulize this problem as there are n numbers of people in the town and on of them is a town judge. Given that everyone trusts town judge but town judge trusts no-one. We can solve this problem by counting the indegree and outdegree of each person and if the indegree of a person is equal to the number of people in the town(except town judge) and outdegree of a person is equal to 0(i.e the person doesn't anyone)then we can say that the person satisfying this two condition can be identified as town judge. Here we take two arrays which counts indegree and outdegree of each person, from which we can determine the town judge.

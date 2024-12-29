@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        inorderTraversalRecursive(root, result);
+        return result;
+    }
+
+private:
+    void inorderTraversalRecursive(TreeNode* root, vector<int>& result) {
+        if (root == nullptr) {
+            return;
+        }
+        inorderTraversalRecursive(root->left, result);
+        result.push_back(root->val);
+        inorderTraversalRecursive(root->right, result);
+
+    }
+};

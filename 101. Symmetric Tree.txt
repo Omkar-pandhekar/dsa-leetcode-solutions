@@ -1,0 +1,19 @@
+ bool check(struct TreeNode *left_tree, struct TreeNode *right_tree){
+    if(left_tree==NULL && right_tree==NULL){
+        return true;
+    }
+    if(left_tree==NULL || right_tree==NULL){
+        return false;
+    }
+
+    return (left_tree->val == right_tree->val) && check(left_tree->left, right_tree->right)
+        && check(left_tree->right, right_tree->left);
+       
+}
+
+bool isSymmetric(struct TreeNode* root) {
+  if (root == NULL){
+        return true;
+  }
+    return check(root->left, root->right);
+}

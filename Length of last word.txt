@@ -1,0 +1,9 @@
+class Solution {
+    public int lengthOfLastWord(String s) {
+        s=s.trim();
+
+        int last_space_index=s.lastIndexOf(' ');
+
+        return (last_space_index == -1) ? s.length() : (s.length() -last_space_index - 1);
+    }
+}

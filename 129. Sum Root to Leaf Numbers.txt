@@ -1,0 +1,16 @@
+int sumNumbers(struct TreeNode* root) {
+    return dfs(root,0);
+}
+
+int dfs(struct TreeNode* temp, int csum){
+    if(temp==NULL){
+        return 0;
+    }
+    csum=csum*10+temp->val;
+
+    if(temp->left==NULL && temp->right==NULL){
+        return csum;
+    }
+
+    return dfs(temp->left,csum)+dfs(temp->right,csum);
+}
