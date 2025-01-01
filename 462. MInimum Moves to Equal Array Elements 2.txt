@@ -1,0 +1,63 @@
+class Solution {
+    public int minMoves2(int[] nums) {
+        int count = 0;
+        int sum = 0;
+
+        for(int i = 0;i < nums.length;i++){
+            sum += nums[i];
+        }
+
+        int avg = sum/nums.length;
+        int med = Integer.MAX_VALUE;
+        int temp;
+        int c = 0;
+
+        for(int j = 0;j < nums.length;j++){
+            temp = Math.abs(avg-nums[j]);
+            if(temp < med){
+                med = temp;
+                c = j;
+            }
+        }
+
+
+        for(int k = 0;k < nums.length;k++){
+            if(k == c){
+                continue;
+            }
+            while(nums[k] != nums[c]){
+                if(nums[k] > nums[c]){
+                    nums[k] = nums[k] - 1;
+                    count++;
+                }
+                
+                else if(nums[k] < nums[c]){
+                    nums[k] = nums[k] + 1;
+                    count++;
+                }
+            }
+        }
+
+        return count;
+
+    }
+}
+
+
+
+
+
+
+class Solution {
+    public int minMoves2(int[] nums) {
+        int count = 0;
+        Arrays.sort(nums);
+        int median = nums[nums.length/2];
+
+        for(int num : nums){
+            count += Math.abs(num-median);
+        }
+        return count;
+
+    }
+}
