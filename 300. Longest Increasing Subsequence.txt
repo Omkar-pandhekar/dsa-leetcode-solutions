@@ -1,0 +1,22 @@
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int[] LIS = new int[nums.length];
+        Arrays.fill(LIS, 1);
+
+        for(int j = nums.length-1; j >= 0;j--){
+            for(int k = j+1;k < nums.length;k++){
+                if(nums[j] < nums[k]){
+                    LIS[j] = Math.max(LIS[j], 1 + LIS[k]);
+                }
+            }
+        }
+
+        int maxLength = 0;
+
+        for(int num : LIS){
+             maxLength = Math.max(maxLength, num);
+        }
+
+        return maxLength;
+    }
+}

@@ -1,0 +1,59 @@
+**Solution No : 1
+
+class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+        List<String> result = new ArrayList<>();
+
+        if(s.length() < 10){
+            return result;
+        }
+
+        Map<String, Integer> sequenceCount = new HashMap<>();
+
+        for(int i = 0;i <= s.length()-10;i++){
+            String str = s.substring(i, i+10);
+            sequenceCount.put(str, sequenceCount.getOrDefault(str, 0)+1);
+        }
+
+         for (Map.Entry<String, Integer> entry : sequenceCount.entrySet()) {
+            if (entry.getValue() > 1) {
+                result.add(entry.getKey());
+            }
+        } 
+
+        return result;
+    }
+}
+
+
+
+The above solution counts the frequency of every substring, and stores the substring and its frequency in
+Map. Then we check if the frequency of any substring is greater than 1 by iterating through sequenceCount. If
+frequency is greater than 1 then we add that substring into out list of arrays i.e result.
+
+
+
+**Solution No : 2
+
+class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+        Set<String>arr=new HashSet<>();
+        Set<String>arr2=new HashSet<>();
+        int n = s.length();
+        if(n<10 || n>10000){
+            return new ArrayList(arr);
+        }
+        for(int i=0;i+9<n;i++){
+            String sub=s.substring(i,i+10);
+            if(!arr.add(sub)){
+                arr2.add(sub);
+            }
+        }
+        return new ArrayList(arr2);
+    }
+}
+
+The second solution uses the HashSet in which if the string is not already added to the firstset then we add it to first set arr, and if the string is already present in the first set then we add it to the another set
+arr2. It's like if the substring is repeated then we store it in some other list then we return the list. This
+solution is better than above solution as there is no need to keep count of the frequenices of the substring 
+we can directly add the repeated substring to our result.
