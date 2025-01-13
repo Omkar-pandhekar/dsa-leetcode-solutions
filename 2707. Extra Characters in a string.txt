@@ -1,0 +1,29 @@
+class Solution {
+    public int minExtraChar(String s, String[] dictionary) {
+        int n = s.length();
+        // Create a set for the dictionary for fast lookups
+        Set<String> dictionarySet = new HashSet<>(Arrays.asList(dictionary));
+        // DP array to store the minimum extra characters for each index
+        int[] dp = new int[n + 1];
+
+        // Base case: No characters left
+        dp[n] = 0;
+
+        // Fill DP array from right to left
+        for (int i = n - 1; i >= 0; i--) {
+            // Default case: Count the current character as extra
+            dp[i] = dp[i + 1] + 1;
+
+            // Try to match substrings starting at index i
+            for (int j = i; j < n; j++) {
+                String curr = s.substring(i, j + 1);
+                if (dictionarySet.contains(curr)) {
+                    dp[i] = Math.min(dp[i], dp[j + 1]);
+                }
+            }
+        }
+
+        // The answer is stored in dp[0]
+        return dp[0];
+    }
+}
