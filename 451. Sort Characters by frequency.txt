@@ -1,0 +1,22 @@
+class Solution {
+    public String frequencySort(String s) {
+        int[][] freqArray = new int[128][2]; 
+
+        for (char c : s.toCharArray()) {
+            freqArray[c][0] = c; // Store character ASCII value
+            freqArray[c][1]++;   // Increment frequency
+        }
+
+        //Sort by frequency in descending order
+        Arrays.sort(freqArray, (a, b) -> Integer.compare(b[1], a[1])); 
+
+        StringBuilder result = new StringBuilder();
+        for (int[] pair : freqArray) {
+            if (pair[1] > 0) {
+                result.append(String.valueOf((char) pair[0]).repeat(pair[1]));
+            }
+        }
+
+        return result.toString();
+    }
+}
