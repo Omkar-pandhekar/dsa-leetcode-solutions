@@ -1,0 +1,22 @@
+class Solution {
+    public int maximumProduct(int[] nums, int k) {
+        Arrays.sort(nums);
+       
+       while(k > 0){
+          int a = 0;
+          nums[a]++;
+          k--;
+        while(a < nums.length-1 && nums[a] > nums[a+1] && k > 0){
+            a++;
+            nums[a]++;
+            k--;
+        }
+       }
+       long ans = 1;
+       for(int i = 0;i<nums.length;i++){
+        ans *= nums[i];
+        ans %= 1000000007;
+       }
+       return (int)ans;
+    }
+}
